@@ -24,23 +24,12 @@ class GildedRose {
                     increaseQuality(i);
 
                     if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                increaseQuality(i);
-                            }
-                        }
-
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                increaseQuality(i);
-                            }
-                        }
+                        handleSellInQuality(i,11);
+                        handleSellInQuality(i,6);
                     }
                 }
             }
-
             handleSulfuras(i,"sellIn");
-
             if (items[i].sellIn < 0) {
                 if (!items[i].name.equals("Aged Brie")) {
                     if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
@@ -51,11 +40,23 @@ class GildedRose {
                         items[i].quality = items[i].quality - items[i].quality;
                     }
                 } else {
-                    if (items[i].quality < 50) {
-                        increaseQuality(i);
-                    }
+                    CheckQuality(i);
                 }
             }
+        }
+    }
+
+
+
+    private void handleSellInQuality(int i,int sellInRemain) {
+        if (items[i].sellIn < sellInRemain) {
+            CheckQuality(i);
+        }
+    }
+
+    private void CheckQuality(int i) {
+        if (items[i].quality < 50) {
+            increaseQuality(i);
         }
     }
 
